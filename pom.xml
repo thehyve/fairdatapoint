@@ -25,6 +25,7 @@
         <spock.version>1.1-groovy-2.4-rc-2</spock.version>
         <groovy.version>2.4.7</groovy.version>
         <gmavenplus.version>1.5</gmavenplus.version>
+        <surefire.version>2.19.1</surefire.version>
     </properties>
 
     <dependencies>
@@ -95,6 +96,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <failIfNoTests>true</failIfNoTests>
+                    <includes>
+                        <include>**/*Spec.*</include>
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
