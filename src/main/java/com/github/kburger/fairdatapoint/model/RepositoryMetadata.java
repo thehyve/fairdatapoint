@@ -19,6 +19,10 @@ public class RepositoryMetadata extends Metadata {
         catalogs = new ArrayList<>();
     }
     
+    public List<URI> getCatalogs() {
+        return catalogs;
+    }
+    
     /**
      * Creates a new {@link Builder} instance to construct immutable {@code RepositoryMetadata}
      * instances.
