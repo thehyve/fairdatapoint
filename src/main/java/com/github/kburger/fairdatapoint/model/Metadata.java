@@ -1,10 +1,13 @@
 package com.github.kburger.fairdatapoint.model;
 
+import com.github.kburger.fairdatapoint.io.annotation.Predicate;
+
 /**
  * Immutable base class for all metadata objects.
  */
 public abstract class Metadata {
     /** dcterms:title */
+    @Predicate(value = "http://purl.org/dc/terms/title", isLiteral = true)
     protected String title;
     
     public String getTitle() {
