@@ -64,7 +64,7 @@
         <!-- test -->
         <dependency>
             <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
+            <artifactId>spock-spring</artifactId>
             <version>${spock.version}</version>
             <scope>test</scope>
         </dependency>

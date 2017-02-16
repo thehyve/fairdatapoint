@@ -10,8 +10,12 @@ import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.github.kburger.fairdatapoint.io.MetadataWriter;
 import com.github.kburger.fairdatapoint.model.Metadata;
@@ -22,9 +26,19 @@ public abstract class MetadataHttpMessageConverter extends AbstractHttpMessageCo
     
     protected RDFFormat format;
     
-    public MetadataHttpMessageConverter(RDFFormat format) {
+    protected MetadataHttpMessageConverter(RDFFormat format) {
         super(getMediaTypes(format));
         this.format = format;
+    }
+    
+    /**
+     * Convenience method for configuring a {@link ContentNegotiationManager} in a spring
+     * {@link WebMvcConfigurerAdapter} style.
+     * @param configurer the {@code ContentNegotiationManager} configurer.
+     */
+    public void configureContentNegotiation(ContentNegotiationManagerFactoryBean configurer) {
+        configurer.addMediaType(format.getDefaultFileExtension(),
+                MediaType.parseMediaType(format.getDefaultMIMEType()));
     }
     
     @Override
@@ -52,6 +66,11 @@ public abstract class MetadataHttpMessageConverter extends AbstractHttpMessageCo
         writer.close();
     }
     
+    /**
+     * Utility method to extract and transform the {@link RDFFormat} MIME types.
+     * @param format {@code RDFFormat} this {@link HttpMessageConverter} uses.
+     * @return array of {@link MediaType MediaTypes} matching {@link RDFFormat#getMIMETypes()}.
+     */
     private static MediaType[] getMediaTypes(RDFFormat format) {
         return format.getMIMETypes().stream()
                 .map(MediaType::parseMediaType)
