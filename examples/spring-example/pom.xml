@@ -13,6 +13,7 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         
         <fairdatapoint.version>0.1.0-SNAPSHOT</fairdatapoint.version>
+        <fairdatapoint-html.version>0.1.0-SNAPSHOT</fairdatapoint-html.version>
         <spring.version>4.3.6.RELEASE</spring.version>
         <servlet.version>3.1.0</servlet.version>
     </properties>
@@ -22,6 +23,11 @@
             <groupId>com.github.kburger</groupId>
             <artifactId>fairdatapoint</artifactId>
             <version>${fairdatapoint.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.kburger</groupId>
+            <artifactId>fairdatapoint-html</artifactId>
+            <version>${fairdatapoint-html.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
